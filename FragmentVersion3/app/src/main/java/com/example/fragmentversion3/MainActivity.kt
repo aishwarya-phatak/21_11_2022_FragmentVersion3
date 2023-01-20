@@ -2,6 +2,7 @@ package com.example.fragmentversion3
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
     private lateinit var formFragment : FormFragment
@@ -11,40 +12,33 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initFragments()
+        initListeners()
     }
-
 
     private fun initFragments(){
         formFragment = supportFragmentManager.findFragmentById(R.id.formFragment) as FormFragment
         dataFragment = supportFragmentManager.findFragmentById(R.id.dataFragment) as DataFragment
     }
 
-    /*
-    fun sendDataToFormFragment(){
-
+    private fun initListeners(){
+            formFragment.onDataListener = MyOnDataListener()
     }
 
-    fun sendDataToDataFragment(){
+    inner class MyOnDataListener : FormFragment.OnDataListener{
+        override fun onData(data: String) {
+            Toast.makeText(this@MainActivity,"MainActivity : $data",Toast.LENGTH_LONG).show()
+            dataFragment.data = data
+        }
 
     }
-    
+    //way 1
+    /*fun sendDataToFormFragment(data : String){
+        dataFragment.data = data
+    }
+
+    fun sendDataToDataFragment(data : String){
+        formFragment.updateData = data
+    }
+
      */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

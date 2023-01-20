@@ -11,6 +11,13 @@ import com.example.fragmentversion3.databinding.FormFragmentBinding
 class FormFragment : Fragment() {
     private lateinit var binding: FormFragmentBinding
 
+    //way 3
+    interface OnDataListener{
+        fun onData(data : String)
+    }
+
+    var onDataListener : OnDataListener? = null
+
     var updateData : String = ""
     set(value) {
         field = value
@@ -23,6 +30,10 @@ class FormFragment : Fragment() {
     ): View? {
         binding = FormFragmentBinding.inflate(inflater)
 
+        /*binding.btnSendData.setOnClickListener {
+            (activity as MainActivity).sendDataToFormFragment(binding.edtData.text.toString())
+        }
+         */
         binding.btnSendData.setOnClickListener {
             (parentFragmentManager.findFragmentById(R.id.dataFragment)
                     as DataFragment).data = binding.edtData.text.toString()

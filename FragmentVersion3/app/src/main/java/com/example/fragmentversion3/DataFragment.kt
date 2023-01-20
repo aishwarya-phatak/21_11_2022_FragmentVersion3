@@ -23,10 +23,19 @@ class DataFragment : Fragment() {
     ): View? {
 
         binding = DataFragmentBinding.inflate(inflater)
+        //way 1 - communication between two fragments through Main Activity
+        /*binding.btnUpdateData.setOnClickListener {
+            (activity as MainActivity).sendDataToFormFragment("$data -- updated")
+        }
+
+         */
+
+        //way 2 - communication between two fragments directly
         binding.btnUpdateData.setOnClickListener {
             (parentFragmentManager.findFragmentById(R.id.formFragment)
                     as FormFragment).updateData = "$data -- updated"
         }
+
         return binding.root
     }
 }
